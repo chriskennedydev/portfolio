@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    service.beta.kubernetes.io/linode-loadbalancer-default-protocol: http
+    service.beta.kubernetes.io/linode-loadbalancer-port-443: '{ "tls-secret-name": "mysec", "protocol": "https" }'
+  name: portfolio-service
+spec:
+  type: LoadBalancer
+  ports:
+    - name: https
+      port: 443
+      targetPort: 5000
+  selector:
+    name: portfolio
+

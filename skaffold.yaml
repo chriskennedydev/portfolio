@@ -10,5 +10,5 @@ build:
 deploy:
   kubectl:
     manifests:
-    - deployment.yml
-    - service.yml
+    - kubernetes/deployment.yml
+    - kubernetes/service.yml

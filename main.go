@@ -22,7 +22,6 @@ func main() {
 	index := http.HandlerFunc(c.Index)
 
 	http.Handle("/", handlers.LoggingHandler(os.Stdout, http.HandlerFunc(index)))
-	//http.Handle("/", loggingFunc(index))
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	http.HandleFunc("/favicon.ico", faviconHandler)
 	http.ListenAndServe(":5000", nil)
