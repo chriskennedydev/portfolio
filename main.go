@@ -21,19 +21,20 @@ func main() {
 	c := controllers.NewController(tpl)
 	index := http.HandlerFunc(c.Index)
 
-	http.Handle("/", loggingFunc(index))
+	http.Handle("/", handlers.LoggingHandler(os.Stdout, http.HandlerFunc(index)))
+	//http.Handle("/", loggingFunc(index))
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	http.HandleFunc("/favicon.ico", faviconHandler)
 	http.ListenAndServe(":5000", nil)
 }
 
 func loggingFunc(h http.Handler) http.Handler {
-	logFile, err := os.OpenFile("portfolio.log", os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0640)
+	_, err := os.OpenFile("portfolio.log", os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0640)
 	if err != nil {
 		log.Fatalf("failed to open log: %v", err)
 	}
 
-	return handlers.LoggingHandler(logFile, h)
+	return handlers.LoggingHandler(os.Stdout, h)
 }
 
 func faviconHandler(w http.ResponseWriter, r *http.Request) {
