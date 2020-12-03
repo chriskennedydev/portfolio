@@ -6,15 +6,15 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      name: portfolio
+      app: portfolio
   template:
     metadata:
       labels:
-        name: portfolio
+        app: portfolio
     spec:
       containers:
       - name: portfolio
         image: sysopsdev/portfolio
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         ports:
           - containerPort: 5000
