@@ -1,3 +1,4 @@
 *.log
 portfolio
 portfolio-kubeconfig.yaml
+bin/
