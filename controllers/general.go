@@ -14,11 +14,25 @@ func NewController(t *template.Template) *Controller {
 }
 
 func (c Controller) Index(w http.ResponseWriter, req *http.Request) {
-	if req.URL.Path != "/" {
+	if req.URL.Path == "/" {
+		c.tpl.ExecuteTemplate(w, "index.gohtml", nil)
+	} else {
 		c.tpl.ExecuteTemplate(w, "notFound.gohtml", nil)
+		w.WriteHeader(http.StatusNotFound)
+		w.Write([]byte("404 - Not Found!"))
 		return
 	}
-	c.tpl.ExecuteTemplate(w, "index.gohtml", nil)
+}
+
+func (c Controller) Resume(w http.ResponseWriter, req *http.Request) {
+	if req.URL.Path == "/resume" {
+		c.tpl.ExecuteTemplate(w, "resume.gohtml", nil)
+	} else {
+		c.tpl.ExecuteTemplate(w, "notFound.gohtml", nil)
+		w.WriteHeader(http.StatusNotFound)
+		w.Write([]byte("404 - Not Found!"))
+		return
+	}
 }
 
 func (c Controller) NotFound(w http.ResponseWriter, req *http.Request, status int) {
