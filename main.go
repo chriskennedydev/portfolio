@@ -20,8 +20,10 @@ func init() {
 func main() {
 	c := controllers.NewController(tpl)
 	index := http.HandlerFunc(c.Index)
+	resume := http.HandlerFunc(c.Resume)
 
 	http.Handle("/", handlers.LoggingHandler(os.Stdout, http.HandlerFunc(index)))
+	http.Handle("/resume", handlers.LoggingHandler(os.Stdout, http.HandlerFunc(resume)))
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	http.HandleFunc("/favicon.ico", faviconHandler)
 	http.ListenAndServe(":5000", nil)
