@@ -4,7 +4,7 @@ metadata:
   name: portfolio
 build:
   artifacts:
-  - image: sysopsdev/portfolio
+  - image: docker.io/sysopsdev/portfolio
     docker:
       dockerfile: Dockerfile
 deploy:

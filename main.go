@@ -2,7 +2,6 @@ package main
 
 import (
 	"html/template"
-	"log"
 	"net/http"
 	"os"
 	"portfolio/controllers"
@@ -29,14 +28,14 @@ func main() {
 	http.ListenAndServe(":5000", nil)
 }
 
-func loggingFunc(h http.Handler) http.Handler {
-	_, err := os.OpenFile("portfolio.log", os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0640)
-	if err != nil {
-		log.Fatalf("failed to open log: %v", err)
-	}
-
-	return handlers.LoggingHandler(os.Stdout, h)
-}
+//func loggingFunc(h http.Handler) http.Handler {
+//	_, err := os.OpenFile("portfolio.log", os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0640)
+//	if err != nil {
+//		log.Fatalf("failed to open log: %v", err)
+//	}
+//
+//	return handlers.LoggingHandler(os.Stdout, h)
+//}
 
 func faviconHandler(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./static/images/favicon.ico")
