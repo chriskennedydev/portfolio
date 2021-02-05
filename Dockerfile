@@ -1,8 +1,8 @@
 FROM golang:1.15 as builder
 WORKDIR /usr/local/go/src/portfolio
-ENV GOBIN /go/bin
-RUN go get github.com/gorilla/handlers
+ENV GOBIN /usr/local/go/bin
 COPY . .
+RUN go get 
 
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-extldflags "-static"' -o site .
 

@@ -19,13 +19,19 @@ func init() {
 func main() {
 	c := controllers.NewController(tpl)
 	index := http.HandlerFunc(c.Index)
+
 	resume := http.HandlerFunc(c.Resume)
+	blog := http.HandlerFunc(c.Blog)
+	latest := http.HandlerFunc(c.Latest)
 
 	http.Handle("/", handlers.LoggingHandler(os.Stdout, http.HandlerFunc(index)))
 	http.Handle("/resume", handlers.LoggingHandler(os.Stdout, http.HandlerFunc(resume)))
+	http.Handle("/blog", handlers.LoggingHandler(os.Stdout, http.HandlerFunc(blog)))
+	http.Handle("/latest", handlers.LoggingHandler(os.Stdout, http.HandlerFunc(latest)))
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	http.HandleFunc("/favicon.ico", faviconHandler)
 	http.ListenAndServe(":5000", nil)
+
 }
 
 func faviconHandler(w http.ResponseWriter, r *http.Request) {

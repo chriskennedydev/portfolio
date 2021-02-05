@@ -35,6 +35,28 @@ func (c Controller) Resume(w http.ResponseWriter, req *http.Request) {
 	}
 }
 
+func (c Controller) Blog(w http.ResponseWriter, req *http.Request) {
+	if req.URL.Path == "/blog" {
+		c.tpl.ExecuteTemplate(w, "blog.gohtml", nil)
+	} else {
+		c.tpl.ExecuteTemplate(w, "notFound.gohtml", nil)
+		w.WriteHeader(http.StatusNotFound)
+		w.Write([]byte("404 - Not Found!"))
+		return
+	}
+}
+
+func (c Controller) Latest(w http.ResponseWriter, req *http.Request) {
+	if req.URL.Path == "/latest" {
+		c.tpl.ExecuteTemplate(w, "latest.gohtml", nil)
+	} else {
+		c.tpl.ExecuteTemplate(w, "notFound.gohtml", nil)
+		w.WriteHeader(http.StatusNotFound)
+		w.Write([]byte("404 - Not Found!"))
+		return
+	}
+}
+
 func (c Controller) NotFound(w http.ResponseWriter, req *http.Request, status int) {
 	w.WriteHeader(status)
 	if status == http.StatusNotFound {
