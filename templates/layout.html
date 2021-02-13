@@ -1,3 +1,4 @@
+{{define "layout"}}
 <!doctype html>
 <html lang="en">
 <head>
@@ -13,10 +14,10 @@
                 <a class="navi" href="/">Home</a>
             </li>
             <li>
-                <a class="navi" href="/resume">Resume</a>
+                <a class="navi" href="/resume.html">Resume</a>
             </li>
             <li>
-                <a class="navi" href="/blog">Blog</a>
+                <a class="navi" href="/blog.html">Blog</a>
             </li>
         </ul>
     </nav>
@@ -27,9 +28,7 @@
     </div>
     <hr />
     <br>
-    <h1>Shenanigans</h1>
-    <a href="/latest">2021-02-05 New Blog!</a>
+  {{template "body"}}
 </body>
 </html>
-
-
+{{end}}
