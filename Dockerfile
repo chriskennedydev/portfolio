@@ -1,4 +1,4 @@
-FROM golang:1.15 as builder
+FROM golang:1.16 as builder
 WORKDIR /usr/local/go/src/portfolio
 ENV GOBIN /usr/local/go/bin
 COPY . .

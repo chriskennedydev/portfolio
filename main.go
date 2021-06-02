@@ -15,7 +15,6 @@ func main() {
 	http.HandleFunc("/favicon.ico", faviconHandler)
 	log.Printf("Server listening on port 5000\n")
 	http.ListenAndServe(":5000", nil)
-
 }
 
 func faviconHandler(w http.ResponseWriter, r *http.Request) {
