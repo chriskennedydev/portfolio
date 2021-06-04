@@ -9,7 +9,7 @@ RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-extldflag
 FROM scratch 
 COPY --from=builder /usr/local/go/src/portfolio /app/
 WORKDIR /app
-
+ENV DATABASE_URL "postgres://postgres:devpass@172.16.0.126:5432/nufor"
 EXPOSE 5000
 
 CMD [ "./site" ]

@@ -1,19 +1,48 @@
 package main
 
 import (
+	"context"
 	"html/template"
 	"log"
 	"net/http"
 	"os"
 	"path/filepath"
+
+	"github.com/jackc/pgx/v4"
 )
 
 // TODO: Database logic
 func main() {
+	// init DB_URL!!!
+	db := os.Getenv("DATABASE_URL")
+	if db == "" {
+		log.Println("Need to set $DATABASE_URL")
+		os.Exit(1)
+	}
+
+	conn, err := pgx.Connect(context.Background(), db)
+	if err != nil {
+		log.Fatalf("Unable to connect to database: %v\n", err)
+		os.Exit(1)
+	}
+
+	defer conn.Close(context.Background())
+
+	var fullName string
+	var id int64
+	err = conn.QueryRow(context.Background(), "select full_name, id from member;").Scan(&fullName, &id)
+
+	if err != nil {
+		log.Fatalf("QueryRow failed: %v\n", err)
+		os.Exit(1)
+	}
+
 	http.HandleFunc("/", serveTemplate)
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	http.HandleFunc("/favicon.ico", faviconHandler)
 	log.Printf("Server listening on port 5000\n")
+	log.Printf("Connected to DB")
+	log.Println(id, fullName)
 	http.ListenAndServe(":5000", nil)
 }
 
