@@ -1,38 +1,43 @@
 body {
-	padding: 20px;
-	max-width: 700px;
-	width: 80%;
+    max-width: 1440px;
     margin: 20px auto;
     font-family: Roboto, Ubuntu, monospace;
+    background-color: #282828;
+    color: #00FF33;
 }
 
 h1 {
-    color: #2c3e50;
-	font-size: 2.0rem;
+    color: #FFB000;
+    font-size: 2.0rem;
+/*    filter: drop-shadow(0 1px 3px); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
 hr {
     border: 0;
     height: 1px;
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    background-image: linear-gradient(to right, rgba(0, 255, 0, 0), rgba(0, 255, 0, 0.75), rgba(0, 255, 0, 0));
 }
 
+img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+}
 
 a i {
-    color: black;
+    color: #FFCC00;
 }
 
 a {
     text-decoration: none;
-	color: black;
+    color: #FFB000;
 }
 
 .center {
-    margin: auto;
-    width: 80%;
-    padding: 10px;
-    overflow-y: overlay;
     text-align: center;
 }
 
@@ -45,3 +50,71 @@ li {
     display: block;
     padding: 8px;
 }
+
+.terminal {
+    animation: blink 1s infinite step-end;
+}
+
+@keyframes blink {
+    from, to { opacity: 0; }
+
+    50% {opacity: 1;}
+}
+
+.glitch {
+  position: relative;
+  text-shadow: 0.05em 0 0 #00FF33, -0.03em -0.04em 0 #FFB000,
+    0.025em 0.04em 0 #FFCC00;
+  animation: glitch 1s infinite;
+}
+
+.glitch span {
+  position: absolute;
+}
+
+.glitch span:first-child {
+  animation: glitch 500ms infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+  transform: translate(-0.04em, -0.03em);
+  opacity: 0.75;
+}
+
+.glitch span:last-child {
+  animation: glitch 375ms infinite;
+  clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+  transform: translate(0.04em, 0.03em);
+  opacity: 0.75;
+}
+
+@keyframes glitch {
+  0% {
+    text-shadow: 0.05em 0 0 #00FF33, -0.03em -0.04em 0 #FFB000,
+      0.025em 0.04em 0 #FFCC00;
+  }
+  15% {
+    text-shadow: 0.05em 0 0 #00FF33, -0.03em -0.04em 0 #FFB000,
+      0.025em 0.04em 0 #FFCC00;
+  }
+  16% {
+    text-shadow: -0.05em -0.025em 0 #00FF33, 0.025em 0.035em 0 #FFB000,
+      -0.05em -0.05em 0 #FFCC00;
+  }
+  49% {
+    text-shadow: -0.05em -0.025em 0 #00FF33, 0.025em 0.035em 0 #FFB000,
+      -0.05em -0.05em 0 #FFCC00;
+  }
+  50% {
+    text-shadow: 0.05em 0.035em 0 #00FF33, 0.03em 0 0 #FFB000,
+      0 -0.04em 0 #FFCC00;
+  }
+  99% {
+    text-shadow: 0.05em 0.035em 0 #00FF33, 0.03em 0 0 #FFB000,
+      0 -0.04em 0 #FFCC00;
+  }
+  100% {
+    text-shadow: -0.05em 0 0 #00FF33, -0.025em -0.04em 0 #FFB000,
+      -0.04em -0.025em 0 #FFCC00;
+  }
+}
+
+
